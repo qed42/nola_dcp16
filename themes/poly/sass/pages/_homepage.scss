@@ -1,0 +1,412 @@
+.path-frontpage .views-element-container{
+  display: none;
+}
+
+#block-eventsatcamp,
+#block-keynoteblock,
+#block-views-block-sponsors-block-1,
+#block-contactblock,
+#block-becomeasponsor,
+#block-homepagebanner {
+  @include container;
+  padding: 80px 0;
+  .block-content {
+    margin: 0 auto;
+    @include breakpoint($mobile){
+      width:94%;
+    }
+    @include breakpoint($tablet){
+      width:80%;
+    }
+  }
+  .block-title {
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    h2{
+      color:  $blue;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+      position:relative;
+      &:after{
+        content:"";
+        background-color:  $blue;
+        width: 148px;
+        height: 8px;
+        position:absolute;
+        bottom:0;
+        left:25%;
+      }
+    }
+    @include breakpoint($mobile){
+      width:94%;
+      h2 {
+        font-size: 20px;
+      }
+    }
+    @include breakpoint($tablet){
+      width:80%;
+      h2 {
+        font-size: 35px;
+      }
+    }
+    @include breakpoint($desktop){
+      width:80%;
+      h2 {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+
+#block-homepagebanner {
+  padding: 220px 0 0 0;
+  .block-content {
+    .field--name-body {
+      @include flexbox;
+      @include align-items(center);
+    }
+    .drupal-pune {
+      position:absolute;
+      top:80px;
+      left:0;
+      width:100%;
+      text-transform: uppercase;
+      &>div{
+        font-family: Didot;
+        text-align: center;
+      }
+      .hello{
+        color:  #1975d2;
+        font-size: 52px;
+        font-weight: 700;
+        line-height: 52px;
+      }
+      .welcome{
+        color:  #282828;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 42px;
+      }
+      .camp{
+        color:  #282828;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 44px;
+      }
+      .year{
+        color:  #282828;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+    }
+    .image {
+      @include span(14 of 16);
+      float: none;
+      margin: 30px auto 0 auto;
+      img {
+        width:100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+#block-becomeasponsor {
+  background-color: $white;
+  text-align: center;
+  .spn {
+    @include container;
+    .spn-text{
+      color:  $grey;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.2;
+      text-align: center;
+      padding-top:10px;
+      @include breakpoint($mobile){
+        @include span(16);
+        float:none;
+        margin: 0 auto;
+      }
+      @include breakpoint($desktop){
+        @include span(10 of 16);
+      }
+    }
+    .spn-btn{
+      text-align: center;
+      border-radius: 6px;
+      background-color:  #fd1f58;
+      box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.21);
+      max-width: 200px;
+      padding: 10px 20px;
+      @include breakpoint($mobile){
+        @include span(16);
+        float:none;
+        margin: 0 auto;
+      }
+      @include breakpoint($desktop){
+        @include span(6 last of 16);
+      }
+      a {
+        color:  #ffffff;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+#block-eventsatcamp{
+  background-color:  $white;
+  .text{
+    @include span(12 of 16);
+    float: none;
+    margin: 0 auto;
+    padding: 10px 0;
+    color:  $grey;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .images {
+    @include flexbox;
+    @include flex-wrap(wrap);
+    .event-info-row{
+      @include breakpoint($mobile){
+        @include span(16);
+      }
+      @include breakpoint($tablet){
+        @include span(8 of 16);
+      }
+      @include breakpoint($desktop){
+        @include span(4 of 16);
+      }
+      &:nth-child(2){
+        @include breakpoint($mobile){
+          @include span(16);
+        }
+        @include breakpoint($tablet){
+          @include span(8 last of 16);
+        }
+        @include breakpoint($desktop){
+          @include span(4 of 16);
+        }
+      }
+      &:nth-child(4){
+        @include breakpoint($mobile){
+          @include span(16);
+        }
+        @include breakpoint($tablet){
+          @include span(8 last of 16);
+        }
+        @include breakpoint($desktop){
+          @include span(4 last of 16);
+        }
+      }
+      img{
+        width: 100%;
+        height: auto;
+      }
+      p{
+        display: block;
+        padding: 10px 20px;
+        color:  $grey;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.4;
+        text-align: center;
+      }
+    }
+  }
+}
+
+#block-keynoteblock{
+  .field--name-body {
+    @include breakpoint($tablet){
+      @include flexbox;
+      @include align-items(center);
+    }
+  }
+  .image{
+    text-align: center;
+    @include breakpoint($mobile){
+      @include span(16);
+      padding:30px 0;
+    }
+    @include breakpoint($tablet){
+      padding:30px;
+      @include span(5 of 16);
+    }
+  }
+  .text{
+    color:  $grey;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    @include breakpoint($mobile){
+      @include span(16);
+      padding:30px 0;
+    }
+    @include breakpoint($tablet){
+      @include span(11 last of 16);
+      padding:30px;
+    }
+  }
+
+}
+
+
+#block-views-block-sponsors-block-1{
+  .block-content {
+    width:90%;
+    margin: 0 auto;
+  }
+  .view-content {
+    @include flexbox;
+    @include flex-wrap(wrap);
+  }
+  .views-row {
+    padding: 10px;
+    box-sizing:border-box;
+    @include breakpoint($mobile){
+      width: 80%;
+    }
+    @include breakpoint($tablet){
+      width: 33%;
+    }
+    @include breakpoint($desktop){
+      width: 33%;
+    }
+  }
+}
+
+#block-campvenue{
+  .block-title {
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    h2{
+      color:  $blue;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+      position:relative;
+      &:after{
+        content:"";
+        background-color:  $blue;
+        width: 148px;
+        height: 8px;
+        position:absolute;
+        bottom:0;
+        left:25%;
+      }
+    }
+    @include breakpoint($mobile){
+      width:94%;
+      h2 {
+        font-size: 20px;
+      }
+    }
+    @include breakpoint($tablet){
+      width:80%;
+      h2 {
+        font-size: 35px;
+      }
+    }
+    @include breakpoint($desktop){
+      width:80%;
+      h2 {
+        font-size: 35px;
+      }
+    }
+  }
+  .block-content {
+    width:90%;
+    margin: 0 auto;
+  }
+  iframe{
+    width: 100% !important;
+  }
+}
+// #block-contactblock{
+//   background: #dedede;
+//   text-align: center;
+//   .block-content {
+//     @include breakpoint($mobile){
+//       width:94%;
+//       margin: 0 auto;
+//     }
+//     @include breakpoint($tablet){
+//       width:80%;
+//       margin: 0 auto;
+//     }
+//     @include breakpoint($desktop){
+//       width:60%;
+//       margin: 0 auto;
+//     }
+//     .form-type-textfield,
+//     .form-type-textarea,
+//     .form-type-item {
+//       @include clearfix;
+//       text-align: left;
+//       margin: 10px 0;
+//       label{
+//         text-transform: uppercase;
+//         font-weight: bold;
+//         font-size: 13px;
+//         font-style: italic;
+
+//         @include breakpoint($mobile){
+//           @include span(16);
+//         }
+//         @include breakpoint($tablet){
+//           text-align: right;
+//           @include span(5 of 16);
+//         }
+//         @include breakpoint($desktop){}
+//         &:after{
+//           display: none;
+//         }
+//       }
+//       input,
+//       textarea {
+//         color: #222;
+//         @include breakpoint($mobile){
+//           @include span(16);
+//         }
+//         @include breakpoint($tablet){
+//           @include span(10 last of 16);
+//         }
+//         @include breakpoint($desktop){}
+//       }
+//     }
+//     #edit-actions {
+//       input.button {
+//         appearance: none;
+//         -moz-appearance: none;
+//         -webkit-appearance: none;
+//         position: relative;
+//         padding: 10px 20px;
+//         margin: 10px 20px 10px 0;
+//         font-weight: 600;
+//         text-align: center;
+//         color: #FFF;
+//         border-radius: 5px;
+//         transition: all 0.2s;
+//         background: #ff0000;
+//         background: #ff0000;
+//         border: none;
+//         @include box-shadow(2px, 3px, 3px, #aaa, false, true);
+//       }
+//     }
+//   }
+// }
+

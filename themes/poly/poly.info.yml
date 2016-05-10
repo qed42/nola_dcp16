@@ -1,0 +1,21 @@
+name: Poly
+type: theme
+description: 'A base theme with sensible default CSS classes added. Learn how to use Classy as a base theme in the <a href="https://www.drupal.org/theme-guide/8">Drupal 8 Theming Guide</a>.'
+package: Core
+base theme: classy
+core: 8.x
+
+libraries:
+  - poly/base
+  - core/normalize
+features:
+  logo: true
+  name: true
+  slogan: true
+  node_user_picture: true
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  main_menu: true
+  secondary_menu: true
+

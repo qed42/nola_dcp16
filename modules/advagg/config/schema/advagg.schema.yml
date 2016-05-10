@@ -1,0 +1,78 @@
+advagg.settings:
+  type: config_entity
+  label: Settings
+  mapping:
+    css:
+      type: mapping
+      label: 'CSS settings'
+      mapping:
+        combine_media:
+          type: boolean
+          label: 'Combine multiple media selectors per aggregate.'
+        fix_type:
+          type: boolean
+          label: 'Fix type of added asset files.'
+        ie:
+          type: mapping
+          label: 'Internet Explorer specific CSS settings.'
+          mapping:
+            limit_selectors:
+              type: boolean
+              label: 'IE9 & under have problems with css files with more than 1095 selectors.'
+            selector_limit:
+              type: integer
+              label: 'Number of selectors to limit to.'
+        via_js:
+          type: boolean
+          label: 'If true then the css is being rendered via javascript'
+    dns_prefetch:
+      type: boolean
+      label: 'Prefetch external domains for css/js'
+    path:
+      type: mapping
+      label: 'Path/Url settings'
+      mapping:
+        convert:
+          type: mapping
+          label: 'What conversions to apply.'
+          mapping:
+            absolute_to_protocol_relative:
+              type: boolean
+              label: 'Convert absolute path css/js src/url() to be protocol relative'
+            absolute_to_relative:
+              type: boolean
+              label: 'Convert absolute paths to relative if self referencing'
+            force_https:
+              type: boolean
+              label: 'Convert absolute path css/js src/url() to use https://'
+    cache_level:
+      type: integer
+    advagg_clear_scripts:
+      type: boolean
+    core_groups:
+      type: boolean
+    cron_frequency:
+      type: integer
+    debug:
+      type: boolean
+    enabled:
+      type: boolean
+    global_counter:
+      type: integer
+    include_base_url:
+      type: boolean
+    js_fix_type:
+      type: boolean
+    root_dir_prefix:
+      type: string
+      label: 'default root dir for the advagg files; controls advagg_get_root_files_dir()'
+    serializer:
+      type: string
+      label: 'Function to use when converting a non scalar to a string'
+    skip_enabled_preprocess_check:
+      type: boolean
+      label: 'Skip preprocess check on status page'
+    separator:
+      type: string
+    show_bypass_cookie_message:
+      type: boolean

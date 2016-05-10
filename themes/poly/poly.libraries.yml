@@ -1,0 +1,13 @@
+base:
+  version: VERSION
+  css:
+    base:
+      css/poly.css: {}
+      css/style.css: {}
+  js:
+    js/elements.js: {}
+    js/main.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once

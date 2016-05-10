@@ -1,0 +1,22 @@
+.path-node {
+  paper-toolbar#mainToolbar{
+    height: 200px;
+  }
+  #mainContainer {
+    .content {
+      background: #fff;
+      box-sizing: border-box;
+      @include box-shadow(1px, 3px, 3px, #aaa, false, true);
+      @include breakpoint($mobile){
+        width: 90%;
+        margin: 60px auto;
+        padding: 30px 10px;
+      }
+      @include breakpoint($tablet){
+        width: 80%;
+        padding: 30px;
+        margin: 100px auto;
+      }
+    }
+  }
+}

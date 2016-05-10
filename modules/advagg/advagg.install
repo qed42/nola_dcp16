@@ -1,0 +1,173 @@
+<?php
+
+/**
+ * @file
+ * Handles Advanced Aggregation installation and upgrade tasks.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_install().
+ */
+function advagg_install() {
+  // Make sure permissions for dirs are correct. Needed if installed via drush.
+  $stat_public = stat('public://');
+  \Drupal::service('file_system')->mkdir('public://css');
+  $stat_css = stat('public://css');
+  \Drupal::service('file_system')->mkdir('public://js');
+  $stat_js = stat('public://js');
+  if (isset($stat_public['uid'])) {
+    if (isset($stat_css['uid']) && $stat_public['uid'] != $stat_css['uid']) {
+      @chown($stat_css[0], $stat_public['uid']);
+    }
+    if (isset($stat_js['uid']) && $stat_public['uid'] != $stat_js['uid']) {
+      @chown($stat_js[0], $stat_public['uid']);
+    }
+  }
+  if (isset($stat_public['gid'])) {
+    if (isset($stat_css['gid']) && $stat_public['gid'] != $stat_css['gid']) {
+      @chgrp($stat_css[0], $stat_public['gid']);
+    }
+    if (isset($stat_js['uid']) && $stat_public['gid'] != $stat_js['gid']) {
+      @chgrp($stat_js[0], $stat_public['gid']);
+    }
+  }
+
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function advagg_uninstall() {
+  \Drupal::service('state.advagg.files')->deleteAll();
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function advagg_requirements($phase) {
+  $requirements = [];
+
+  // Ensure translations don't break at install time.
+  $t = 't';
+
+  // Always check these, independent of the current phase.
+  $function_list = [
+    'rename',
+  ];
+  // Check each function to make sure it exists.
+  foreach ($function_list as $function_name) {
+    if (!function_exists($function_name)) {
+      $requirements['advagg_function_' . $function_name] = [
+        'title' => $t('Adv CSS/JS Agg - Function Disabled'),
+        'value' => $phase === 'install' ? FALSE : $function_name,
+        'severity' => REQUIREMENT_ERROR,
+        'description' => $t('<a href="!url">%name()</a> is disabled on this server. Please contact your hosting provider or server administrator and see if they can re-enable this function for you.', [
+          '!url' => 'http://php.net/' . str_replace('_', '-', $function_name),
+          '%name' => $function_name,
+        ]),
+      ];
+    }
+  }
+
+  // If not at runtime, return here.
+  if ($phase !== 'runtime') {
+    return $requirements;
+  }
+  $config = \Drupal::config('advagg.settings');
+  $system_config = \Drupal::config('system.performance');
+
+  if (!$config->get('skip_enabled_preprocess_check')) {
+    // Make sure variables are set correctly.
+    if (!$config->get('enabled')) {
+      $requirements['advagg_not_on'] = [
+        'title' => $t('Adv CSS/JS Agg - Enabled'),
+        'severity' => REQUIREMENT_WARNING,
+        'value' => $t('Advanced CSS/JS aggregation is disabled.'),
+        'description' => $t('Go to the Advanced CSS/JS aggregation <a href="@settings">settings page</a> and enable it.', ['@settings' => Url::fromRoute('advagg.settings')->toString()]),
+      ];
+    }
+    if (!$system_config->get('css.preprocess') || !$system_config->get('js.preprocess')) {
+      $requirements['advagg_core_off'] = [
+        'title' => $t('Adv CSS/JS Agg - Core Variables'),
+        'severity' => REQUIREMENT_ERROR,
+        'value' => $t('Cores CSS and/or JS aggregation is disabled.'),
+        'description' => $t('"Optimize CSS files" and "Optimize JavaScript files" on the <a href="@performance">performance page</a> should be enabled.', ['@performance' => Url::fromRoute('system.performance_settings')->toString()]),
+      ];
+    }
+  }
+
+  // Check that https is correct.
+  // @ignore sniffer_whitespace_openbracketspacing_openingwhitespace:2
+  if (  empty($GLOBALS['is_https']) &&
+    (  (isset($_SERVER['HTTPS']) &&  strtolower($_SERVER['HTTPS']) === 'on')
+    || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+    || (isset($_SERVER['HTTP_HTTPS']) && $_SERVER['HTTP_HTTPS'] === 'on')
+    )
+  ) {
+    $requirements['advagg_is_https_check'] = [
+      'title' => $t('Adv CSS/JS Agg - HTTPS'),
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('The core global $is_https is not TRUE.'),
+      'description' => $t('You need to add in this logic near the top your settings.php file: <pre>@code</pre>', [
+        '@code' => 'if ( (isset($_SERVER[\'HTTPS\']) && strtolower($_SERVER[\'HTTPS\']) == \'on\')
+ || (isset($_SERVER[\'HTTP_X_FORWARDED_PROTO\']) && $_SERVER[\'HTTP_X_FORWARDED_PROTO\'] == \'https\')
+ || (isset($_SERVER[\'HTTP_HTTPS\']) && $_SERVER[\'HTTP_HTTPS\'] == \'on\')
+) {
+ $_SERVER[\'HTTPS\'] = \'on\';
+}',
+      ]),
+    ];
+  }
+
+  // Make sure $base_url is correct.
+  if (!empty($GLOBALS['is_https']) && strpos($GLOBALS['base_url'], 'https://') !== 0) {
+    $requirements['advagg_is_https_check'] = [
+      'title' => $t('Adv CSS/JS Agg - HTTPS'),
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('The core global $base_url\'s scheme is incorrect.'),
+      'description' => $t('You need to add in this logic near the bottom of your settings.php file: <pre>@code</pre>', [
+        '@code' => 'if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on" && isset($base_url)) {
+$base_url = str_replace("http://", "https://", $base_url);
+}',
+      ]),
+    ];
+  }
+
+  $description = '';
+
+  if (!$config->get('enabled')) {
+    $description .= ' ' . $t('Advanced CSS/JS aggregation is disabled. Go to the Advanced CSS/JS aggregation <a href="@settings">settings page</a> and enable it.', ['@settings' => Url::fromRoute('advagg.settings')->toString()]);
+  }
+  if (!$system_config->get('css.preprocess') || !$system_config->get('js.preprocess')) {
+    $description .= ' ' . $t('Cores CSS and/or JS aggregation is disabled. "Optimize CSS files" and "Optimize JavaScript files" on the <a href="@performance">performance page</a> should be enabled.', ['@performance' => Url::fromRoute('system.performance_settings')->toString()]);
+  }
+
+  if ($config->get('cache_level') < 0) {
+    $description .= ' ' . $t('Currently running in development mode.');
+  }
+
+  $requirements['advagg_ok'] = [
+    'title' => $t('Adv CSS/JS Agg'),
+    'severity' => REQUIREMENT_OK,
+    'value' => $t('OK'),
+    'description' => $t('Advanced CSS/JS Aggregator should be working correctly.') . ' ' . $description,
+  ];
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Updates all the stored file information.
+ */
+function advagg_update_8201() {
+  $advagg_files = \Drupal::service('state.advagg.files');
+  $files = $advagg_files->getAll();
+  foreach ($files as $file => $cached) {
+    $advagg_files->scanFile($file,$cached);
+  }
+}

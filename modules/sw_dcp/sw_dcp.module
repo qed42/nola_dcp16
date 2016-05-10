@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function sw_dcp_page_attachments_alter(array &$attachments) {
+  $attachments['#attached']['library'][] = 'sw_dcp/serviceworker';
+  $manifest = array(
+    '#type' => 'html_tag',
+    '#tag' => 'link',
+    '#attributes' => array(
+      'rel' => 'manifest',
+      'href' => '/manifest.json',
+    ),
+  );
+  $attachments['#attached']['html_head'][] = [$manifest, 'manifest'];
+}

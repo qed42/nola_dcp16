@@ -1,0 +1,37 @@
+@import "susy";
+// @import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+@import "breakpoint";
+
+@font-face {
+  font-family: 'Didot';
+  src: url('didot.eot');
+  src: url('didot.eot?#iefix') format('embedded-opentype'),
+       url('didot.woff') format('woff'),
+       url('didot.ttf')  format('truetype'),
+}
+
+$mobile : screen;
+$tablet : min-width 768px;
+$desktop : min-width 1025px;
+$widedesktop : min-width 1200px;
+
+@include breakpoint($mobile){}
+@include breakpoint($tablet){}
+@include breakpoint($desktop){}
+@include breakpoint($widedesktop){}
+
+$susy: (
+  flow: ltr,
+  math: fluid,
+  output: float,
+  gutter-position: after,
+  container: auto,
+  container-position: center,
+  columns: 16,
+  /* number of columns */
+  gutters: .25,
+  /* gutter size */
+  column-width: false,
+  global-box-sizing: content-box,
+  last-flow: to
+);

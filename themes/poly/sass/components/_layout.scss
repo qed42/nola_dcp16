@@ -1,0 +1,135 @@
+body {
+  background-color:  $lighter-grey;
+}
+
+.side-drawer{
+  overflow-y: scroll;
+}
+
+paper-toolbar.paper-toolbar-0 {
+  height: 74px;
+  background: $light-grey;
+  color:#000;
+}
+
+.header-logo {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top:0;
+  left:0;
+  img {
+    width: 200px;
+  }
+}
+
+.paper-card-0 .header.paper-card .title-text.over-image.paper-card {
+  width: 100%;
+  box-sizing: border-box;
+  background: #000;
+  color: #fff;
+}
+
+#drawer {
+  &.paper-drawer-panel {
+    > [drawer] {
+      height: 100%;
+      box-shadow: 0 0 5px 1px $darkgrey3;
+    }
+    #topBar img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  h2 {
+    padding: 10px 16px;
+    margin: 0;
+    font-size: 1.2em;
+  }
+  .paper-font-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 30px;
+    bottom: 0;
+    position: absolute;
+  }
+  paper-toolbar.paper-toolbar-0 {
+    height: auto;
+    background: $lightgrey;
+  }
+  .paper-toolbar-0 .toolbar-tools.paper-toolbar {
+    height: auto;
+  }
+  #middleBar.paper-toolbar {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+  }
+  paper-item a {
+    color: #222;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding-left: 20px;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  #drawerToolbar a {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $white;
+  }
+}
+
+.paper-drawer-panel #topBar.paper-toolbar {
+  padding: 0;
+}
+
+#drawerToolbar img {
+  width: 100%;
+  height: auto;
+}
+
+#mainPanel{
+
+}
+
+#mainContainer .content {
+  margin: 0 auto;
+  min-height: 800px;
+}
+
+
+.site-footer {
+  text-align: center;
+  padding: 48px 24px;
+  background-color: $darkgrey3;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  paper-menu {
+    display: block;
+    padding: 0;
+    background: none;
+    color: $white;
+  }
+  paper-item {
+    min-height:auto;
+    display: inline-block;
+    text-align: center;
+    a {
+      color: $white;
+      text-decoration: none;
+    }
+  }
+}
+
+.title img {
+  width: 100%;
+  height: auto;
+}
+

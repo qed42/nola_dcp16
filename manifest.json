@@ -1,0 +1,51 @@
+{
+  "version": "1.0.0",
+  "name": "DCP",
+  "description": "Drupal camp website.",
+  "start_url": "./",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "splash_screens":[{
+    "src": "splash-logos/pdg-192.png",
+    "sizes": "320x240"
+  }],
+  "theme_color": "aliceblue",
+  "icons": [{
+    "src": "splash-logos/pdg-48.png",
+    "sizes": "48x48",
+    "type": "image/png"
+  }, {
+    "src": "splash-logos/pdg-72.png",
+    "sizes": "72x72",
+    "type": "image/png"
+  }, {
+    "src": "splash-logos/pdg-96.png",
+    "sizes": "96x96",
+    "type": "image/png"
+  }, {
+    "src": "splash-logos/pdg-144.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }, {
+    "src": "splash-logos/pdg-168.png",
+    "sizes": "168x168",
+    "type": "image/png"
+  }, {
+    "src": "splash-logos/pdg-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }],
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "DCP",
+      "description": "Drupal Camp Pune Website"
+    }
+  }
+}

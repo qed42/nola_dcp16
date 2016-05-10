@@ -1,0 +1,7 @@
+serviceworker:
+  version: 8.x
+  js:
+    js/sw_dcp.js: {}
+  css:
+    theme:
+      css/sw_dcp.css: {}

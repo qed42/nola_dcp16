@@ -1,0 +1,33 @@
+
+# In order to to create pages it is necessary to define routes for them.
+# A route maps a URL path to a controller. It defines with what function
+# or method will be called when a URL is accessed.
+# If the user accesses http://drupal8.dev/css-js-aggregated.json, the routing
+# system will look for a route with that path. In this case it will find a
+# match, and execute the _controller callback. In this case the callback is
+# defined as a classname
+# ("\Drupal\sw_dcp\Controller\SwDcpController")
+# and a method ("getAggregatedCssJS").
+sw_dcp.sw_dcp_controller_getAggregatedCssJS:
+  path: 'css-js-aggregated.json'
+  defaults:
+    _controller: '\Drupal\sw_dcp\Controller\SwDcpController::getAggregatedCssJS'
+    _title: 'getAggregatedCssJS'
+  requirements:
+    _permission: 'access content'
+# In order to to create pages it is necessary to define routes for them.
+# A route maps a URL path to a controller. It defines with what function
+# or method will be called when a URL is accessed.
+# If the user accesses http://drupal8.dev/add-schedule/{node}, the routing
+# system will look for a route with that path. In this case it will find a
+# match, and execute the _controller callback. In this case the callback is
+# defined as a classname
+# ("\Drupal\sw_dcp\Controller\SwDcpController")
+# and a method ("syncSchedule").
+sw_dcp.sw_dcp_controller_syncSchedule:
+  path: 'schedule/{entity_id}/{action}/{uid}'
+  defaults:
+    _controller: '\Drupal\sw_dcp\Controller\SwDcpController::syncSchedule'
+    _title: 'syncSchedule'
+  requirements:
+    _permission: 'access content'

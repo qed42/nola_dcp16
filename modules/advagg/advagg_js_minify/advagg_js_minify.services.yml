@@ -1,0 +1,4 @@
+services:
+  asset.js.optimizer:
+    class: Drupal\advagg_js_minify\Asset\JsOptimizer
+    arguments: [ '@cache.advagg.minify', '@config.factory', '@state.advagg.files', '@module_handler' ]

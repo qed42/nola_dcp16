@@ -1,0 +1,18 @@
+<dom-module id="site-message"><template><style>
+            ::host {
+                background: blue;
+                color: white;
+                display: block;
+            }
+        </style><content select=".message"></content></template><script>
+        Polymer({
+            is: "site-message",
+            properties: {
+                shown: {
+                    type: Boolean,
+                    value: false,
+                    notify: true
+                }
+            }
+        });
+    </script></dom-module>
